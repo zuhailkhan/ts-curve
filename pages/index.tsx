@@ -1,35 +1,35 @@
 import Head from 'next/head'
 import Header from '../components/Header'
 import Jumbotron from '../components/Jumbotron'
-import Posts from '../components/Posts'
+import TrendingPosts from '../components/TrendingPosts'
 import { sanityClient } from '../sanity'
-import { Post } from '../typing'
+import { Post } from '../types'
 
-interface Posts { 
-  posts: [Post]
+interface Posts {
+  posts: Post[]
 }
 
-const Home = ({posts}: Posts) => {
+const Home: React.FC<Posts> = ({ posts }) => {
   return (
-    <div className='mx-auto'>
+    <div className='mx-auto mb-9xl'>
       <Head>
         <title>Medium 2.0</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-     <div className='bg-yellow-500'>
-      <div className="border-b border-black">
+
+      <div className='bg-yellow-500'>
+        <div className="border-b border-black">
           <Header />
         </div>
 
         <div className="border-b border-black">
           <Jumbotron />
         </div>
-     </div>
+      </div>
 
-
-      <Posts props={posts}/>
+      <TrendingPosts posts={posts} />
     </div>
+
   )
 }
 
@@ -59,7 +59,7 @@ export const getServerSideProps = async () => {
 
   } catch (error) {
     console.log(error)
-    return { 
+    return {
       props: {
         msg: "Error Occured"
       }
