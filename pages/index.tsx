@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Header from '../components/Header'
 import Jumbotron from '../components/Jumbotron'
+import PostFeed from '../components/PostFeed'
 import TrendingPosts from '../components/TrendingPosts'
 import { sanityClient } from '../sanity'
 import { Post } from '../types'
@@ -11,7 +12,7 @@ interface Posts {
 
 const Home: React.FC<Posts> = ({ posts }) => {
   return (
-    <div className='mx-auto mb-9xl'>
+    <div className='mx-auto'>
       <Head>
         <title>Medium 2.0</title>
         <link rel="icon" href="/favicon.ico" />
@@ -28,8 +29,11 @@ const Home: React.FC<Posts> = ({ posts }) => {
       </div>
 
       <TrendingPosts posts={posts} />
-    </div>
 
+      <hr className='w-full' />
+
+      <PostFeed posts={posts}/>
+    </div>
   )
 }
 
@@ -47,6 +51,8 @@ export const getServerSideProps = async () => {
       },
       categories,
       publishedAt,
+      mainImage,
+      subtitle
     }`
 
     let posts = await sanityClient.fetch(query)

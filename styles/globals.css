@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.flex-el{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.flex-el li{
+    padding: 10px;
+    border: 1px solid grey;
+    margin: 10px 0;
+}

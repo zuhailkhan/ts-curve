@@ -5,6 +5,7 @@ export interface Post {
     author: {
         name: string;
         title: string;
+        image: Object;
     };
     subtitle: string;
     description: string;
@@ -17,5 +18,13 @@ export interface Post {
             url: string;
         }
     },
+    publishedAt: string,
     body: [object]
+}
+
+export interface SinglePost extends Post {
+    _id: string;
+    publishedAt: string;
+    title: string;
+    mainImage: Object;
 }

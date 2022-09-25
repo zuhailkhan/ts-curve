@@ -1,23 +1,10 @@
 import React from 'react'
 import { urlFor } from '../sanity'
 import Image from 'next/image'
+import { Post } from '../types'
 
 type Props = {
-  posts: []
-}
-
-interface Post {
-  _id: string,
-  title: string,
-  slug: {
-    current: string
-  },
-  author: {
-    name: string,
-    image: Object
-  },
-  categories: [],
-  publishedAt: string,
+  posts: Post[]
 }
 
 const TrendingPosts: React.FC<Props> = ({ posts }) => {
@@ -28,19 +15,19 @@ const TrendingPosts: React.FC<Props> = ({ posts }) => {
     return `${month.slice(0, 3)}, ${day}`
   }
   return (
-    <div className="sec-trendingWrapper max-w-7xl mx-auto p-3 mb-60">
+    <div className="sec-trendingWrapper max-w-7xl mx-auto p-3 space-y-5">
       <div className="flex items-center">
         <h1 className="font-semibold ml-1 ">Trending on Medium</h1>
       </div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {posts && posts.map((post: Post, index: number) => {
           return (
-            <li className="">
-              <div className="flex justify-between">
+            <li className="" key={index}>
+              <div className="flex justify-left space-x-3">
                 <div className="">
                   <h1 className="font-black text-3xl text-gray-300">{(index + 1).toString().padStart(2, '0')}</h1>
                 </div>
-                <div className="flex flex-col px-3 py-2">
+                <div className="flex flex-col px-3 py-2 space-y-2">
                   <div className="sec-author flex items-center space-x-2">
                     <img className="w-6 h-6 aspect-square object-cover rounded-full" src={urlFor(post.author.image).url()} alt="AuthorImg" />
                     <h1 className="font-medium">{post.author.name}</h1>
